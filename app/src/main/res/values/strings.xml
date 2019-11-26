@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ExchangeRatesLive</string>
+    <string name="generic_error">Unexpected error</string>
 </resources>

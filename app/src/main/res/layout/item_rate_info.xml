@@ -7,7 +7,7 @@
     android:background="#ccc">
 
     <TextView
-        android:id="@+id/currency"
+        android:id="@+id/currency_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
@@ -18,17 +18,17 @@
         tools:text="EUR" />
 
     <TextView
-        android:id="@+id/currency_name"
+        android:id="@+id/currency_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/amount"
+        app:layout_constraintEnd_toStartOf="@id/amount_et"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Euro" />
 
     <EditText
-        android:id="@+id/amount"
+        android:id="@+id/amount_et"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
