@@ -1,8 +1,8 @@
-package com.vitovalov.exchangerateslive.di
+package com.vitovalov.exchangerateslive.internal.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.vitovalov.exchangerateslive.ExchangeRatesListViewModel
+import com.vitovalov.exchangerateslive.presentation.ExchangeRatesListViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module

@@ -1,8 +1,7 @@
 package com.vitovalov.exchangerateslive
 
-import android.app.Activity
 import android.app.Application
-import com.vitovalov.exchangerateslive.di.DaggerApplicationComponent
+import com.vitovalov.exchangerateslive.internal.di.DaggerApplicationComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector

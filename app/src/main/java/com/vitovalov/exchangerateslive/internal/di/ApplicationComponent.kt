@@ -1,4 +1,4 @@
-package com.vitovalov.exchangerateslive.di
+package com.vitovalov.exchangerateslive.internal.di
 
 import android.app.Application
 import com.vitovalov.exchangerateslive.ExchangeRatesLiveApp

@@ -1,6 +1,6 @@
-package com.vitovalov.exchangerateslive.di
+package com.vitovalov.exchangerateslive.internal.di
 
-import com.vitovalov.exchangerateslive.ExchangeRatesListActivity
+import com.vitovalov.exchangerateslive.presentation.ExchangeRatesListActivity
 import dagger.Module
 import dagger.android.AndroidInjector
 import dagger.android.ContributesAndroidInjector
