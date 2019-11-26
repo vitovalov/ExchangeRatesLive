@@ -5,5 +5,4 @@ import javax.inject.Inject
 
 class ExchangeRatesListViewModel @Inject constructor() : ViewModel() {
 
-    var testText = "Hello"
 }

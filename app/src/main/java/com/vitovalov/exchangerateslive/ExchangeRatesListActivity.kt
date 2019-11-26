@@ -22,15 +22,5 @@ class ExchangeRatesListActivity : AppCompatActivity() {
         viewModel =
             ViewModelProviders.of(this, viewModelFactory)[ExchangeRatesListViewModel::class.java]
 
-        testViewModel()
-    }
-
-    private fun testViewModel() {
-        textView.text = viewModel.testText
-
-        textView.postDelayed({
-            viewModel.testText = "newValue=${System.nanoTime()}"
-            textView.text = viewModel.testText
-        }, 2000)
     }
 }
