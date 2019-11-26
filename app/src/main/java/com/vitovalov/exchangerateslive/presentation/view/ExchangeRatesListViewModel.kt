@@ -1,10 +1,11 @@
-package com.vitovalov.exchangerateslive.presentation
+package com.vitovalov.exchangerateslive.presentation.view
 
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.DiffUtil
 import com.vitovalov.exchangerateslive.domain.UpdateBaseCurrencyUseCase
 import com.vitovalov.exchangerateslive.domain.ObserveExchangeRatesUseCase
 import com.vitovalov.exchangerateslive.domain.UpdateUserAmountUseCase
+import com.vitovalov.exchangerateslive.presentation.view.uiutils.ExchangeRateItemDiffList
 import com.vitovalov.exchangerateslive.presentation.model.ExchangeListUiState
 import com.vitovalov.exchangerateslive.presentation.model.ExchangeRateUiModel
 import io.reactivex.Single
@@ -56,7 +57,12 @@ class ExchangeRatesListViewModel @Inject constructor(
         oldList: List<ExchangeRateUiModel>,
         newList: List<ExchangeRateUiModel>
     ): Single<DiffUtil.DiffResult> {
-        return Single.just(DiffUtil.calculateDiff(ExchangeRateItemDiffList(oldList, newList)))
+        return Single.just(DiffUtil.calculateDiff(
+            ExchangeRateItemDiffList(
+                oldList,
+                newList
+            )
+        ))
             .subscribeOn(Schedulers.io())
     }
 

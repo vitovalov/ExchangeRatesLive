@@ -1,4 +1,4 @@
-package com.vitovalov.exchangerateslive.presentation
+package com.vitovalov.exchangerateslive.presentation.view
 
 import android.os.Bundle
 import android.util.Log
@@ -30,15 +30,18 @@ class ExchangeRatesListActivity : AppCompatActivity() {
         viewModel =
             ViewModelProviders.of(this, viewModelFactory)[ExchangeRatesListViewModel::class.java]
 
-        exchangeRateListAdapter = ExchangeRatesListAdapter(
-            viewModel::onCurrencySelected,
-            viewModel::onAmountChanged,
-            viewModel::onCalculateListsDifferences,
-            mutableListOf()
-        )
+        exchangeRateListAdapter =
+            ExchangeRatesListAdapter(
+                viewModel::onCurrencySelected,
+                viewModel::onAmountChanged,
+                viewModel::onCalculateListsDifferences,
+                mutableListOf()
+            ).apply { setHasStableIds(true) }
 
-        exchange_rates_list.layoutManager = LinearLayoutManager(this@ExchangeRatesListActivity)
-        exchange_rates_list.adapter = exchangeRateListAdapter
+        exchange_rates_list.apply {
+            layoutManager = LinearLayoutManager(this@ExchangeRatesListActivity)
+            adapter = exchangeRateListAdapter
+        }
     }
 
     override fun onResume() {

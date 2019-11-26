@@ -1,4 +1,4 @@
-package com.vitovalov.exchangerateslive.presentation
+package com.vitovalov.exchangerateslive.presentation.view.uiutils
 
 import android.text.Editable
 import android.text.TextWatcher

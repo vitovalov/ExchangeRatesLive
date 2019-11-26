@@ -1,4 +1,4 @@
-package com.vitovalov.exchangerateslive.presentation
+package com.vitovalov.exchangerateslive.presentation.view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.vitovalov.exchangerateslive.R
+import com.vitovalov.exchangerateslive.presentation.view.uiutils.AmountInputTextWatcher
+import com.vitovalov.exchangerateslive.presentation.view.uiutils.CurrencyAmountDifference
 import com.vitovalov.exchangerateslive.presentation.model.ExchangeRateUiModel
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,7 +24,9 @@ class ExchangeRatesListAdapter(
     RecyclerView.Adapter<ExchangeRatesListAdapter.RateInfoViewHolder>() {
 
     private val amountInputTextWatcher =
-        AmountInputTextWatcher(onAmountChanged)
+        AmountInputTextWatcher(
+            onAmountChanged
+        )
     private var listsDiffDisposable: Disposable? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RateInfoViewHolder {

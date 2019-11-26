@@ -1,4 +1,4 @@
-package com.vitovalov.exchangerateslive.presentation
+package com.vitovalov.exchangerateslive.presentation.view.uiutils
 
 import androidx.recyclerview.widget.DiffUtil
 import com.vitovalov.exchangerateslive.presentation.model.ExchangeRateUiModel
@@ -20,7 +20,9 @@ class ExchangeRateItemDiffList(
         oldList[oldItemPosition].amount == newList[newItemPosition].amount
 
     override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any? =
-        CurrencyAmountDifference(newList[newItemPosition].amount)
+        CurrencyAmountDifference(
+            newList[newItemPosition].amount
+        )
 }
 
 data class CurrencyAmountDifference(val newCurrencyAmountValue: BigDecimal)
