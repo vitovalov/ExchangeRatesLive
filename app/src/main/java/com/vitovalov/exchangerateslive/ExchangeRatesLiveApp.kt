@@ -5,13 +5,13 @@ import android.app.Application
 import com.vitovalov.exchangerateslive.di.DaggerApplicationComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
+import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class ExchangeRatesLiveApp : Application(), HasActivityInjector {
+class ExchangeRatesLiveApp : Application(), HasAndroidInjector {
 
     @Inject
-    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
+    lateinit var activityInjector: DispatchingAndroidInjector<Any>
 
     override fun onCreate() {
         super.onCreate()
@@ -21,5 +21,5 @@ class ExchangeRatesLiveApp : Application(), HasActivityInjector {
             .inject(this)
     }
 
-    override fun activityInjector(): AndroidInjector<Activity> = activityInjector
+    override fun androidInjector(): AndroidInjector<Any> = activityInjector
 }
