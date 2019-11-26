@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import java.util.*
 
-interface RevolutExchangeRatesApiService {
+interface ExchangeRatesApiService {
 
     @GET("latest")
     fun getRatesForBase(@Query("base") baseCurrency: Currency): Single<ExchangeRatesResponse>

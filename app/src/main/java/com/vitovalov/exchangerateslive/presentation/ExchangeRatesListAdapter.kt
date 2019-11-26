@@ -7,11 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vitovalov.exchangerateslive.R
 import com.vitovalov.exchangerateslive.presentation.model.ExchangeRateUiModel
 import kotlinx.android.synthetic.main.item_rate_info.view.*
+import java.math.BigDecimal
 
 class ExchangeRatesListAdapter(
-        private var itemList: MutableList<ExchangeRateUiModel>
+        onAmountChanged: (BigDecimal) -> Unit,
+        private val itemList: MutableList<ExchangeRateUiModel>
 ) :
         RecyclerView.Adapter<ExchangeRatesListAdapter.RateInfoViewHolder>() {
+
+    private val amountInputTextWatcher =
+            AmountInputTextWatcher(onAmountChanged)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RateInfoViewHolder {
         val viewHolder =
@@ -20,6 +25,7 @@ class ExchangeRatesListAdapter(
                                 R.layout.item_rate_info, parent, false
                         )
                 )
+        viewHolder.currencyAmountEditText.addTextChangedListener(amountInputTextWatcher)
 
         return viewHolder
     }

@@ -27,9 +27,13 @@ class ExchangeRatesListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory)[ExchangeRatesListViewModel::class.java]
+        viewModel =
+                ViewModelProviders.of(this, viewModelFactory)[ExchangeRatesListViewModel::class.java]
 
-        exchangeRateListAdapter = ExchangeRatesListAdapter(mutableListOf())
+        exchangeRateListAdapter = ExchangeRatesListAdapter(
+                viewModel::onAmountChanged,
+                mutableListOf()
+        )
 
         exchange_rates_list.layoutManager = LinearLayoutManager(this@ExchangeRatesListActivity)
         exchange_rates_list.adapter = exchangeRateListAdapter

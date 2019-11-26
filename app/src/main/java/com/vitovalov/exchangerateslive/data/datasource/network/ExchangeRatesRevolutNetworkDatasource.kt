@@ -6,8 +6,8 @@ import io.reactivex.schedulers.Schedulers
 import java.math.BigDecimal
 import java.util.*
 
-class RevolutExchangeRatesNetworkService(private val apiService: RevolutExchangeRatesApiService) :
-    ExchangeRatesNetworkService {
+class ExchangeRatesRevolutNetworkDatasource(private val apiService: ExchangeRatesApiService) :
+    ExchangeRatesNetworkDatasource {
 
     override fun getExchangeRatesForBase(baseCurrency: Currency): Single<ExchangeRatesModel> =
         apiService.getRatesForBase(baseCurrency)

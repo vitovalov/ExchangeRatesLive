@@ -9,7 +9,7 @@ import java.math.BigDecimal
 
 class ObserveExchangeRatesUseCase(private val repository: ExchangeRatesRepository) {
 
-    fun run(): Flowable<List<ExchangeRateUiModel>> =
+    fun execute(): Flowable<List<ExchangeRateUiModel>> =
             repository.observeExchangeRates(Config.START_BASE_CURRENCY)
                     .map { m -> m.mapToUiModel() }
                     .subscribeOn(Schedulers.computation())
