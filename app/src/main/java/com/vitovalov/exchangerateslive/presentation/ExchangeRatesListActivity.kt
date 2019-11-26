@@ -28,11 +28,13 @@ class ExchangeRatesListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         viewModel =
-                ViewModelProviders.of(this, viewModelFactory)[ExchangeRatesListViewModel::class.java]
+            ViewModelProviders.of(this, viewModelFactory)[ExchangeRatesListViewModel::class.java]
 
         exchangeRateListAdapter = ExchangeRatesListAdapter(
-                viewModel::onAmountChanged,
-                mutableListOf()
+            viewModel::onCurrencySelected,
+            viewModel::onAmountChanged,
+            viewModel::onCalculateListsDifferences,
+            mutableListOf()
         )
 
         exchange_rates_list.layoutManager = LinearLayoutManager(this@ExchangeRatesListActivity)
@@ -43,21 +45,21 @@ class ExchangeRatesListActivity : AppCompatActivity() {
         super.onResume()
 
         viewModel.observeExchangeListState(
-                object : DisposableSubscriber<ExchangeListUiState>() {
-                    override fun onComplete() {}
+            object : DisposableSubscriber<ExchangeListUiState>() {
+                override fun onComplete() {}
 
-                    override fun onNext(state: ExchangeListUiState) {
-                        when (state) {
-                            is ExchangeListUiState.Loading -> showLoading()
-                            is ExchangeListUiState.Error -> showError(getString(R.string.generic_error))
-                            is ExchangeListUiState.Update -> updateItems(state.currencyExchangeList)
-                        }
-                    }
-
-                    override fun onError(t: Throwable) {
-                        Log.e("TODO", "Error: ${t.message}")
+                override fun onNext(state: ExchangeListUiState) {
+                    when (state) {
+                        is ExchangeListUiState.Loading -> showLoading()
+                        is ExchangeListUiState.Error -> showError(getString(R.string.generic_error))
+                        is ExchangeListUiState.Update -> updateItems(state.currencyExchangeList)
                     }
                 }
+
+                override fun onError(t: Throwable) {
+                    Log.e("TODO", "Error: ${t.message}")
+                }
+            }
         )
     }
 
@@ -65,7 +67,6 @@ class ExchangeRatesListActivity : AppCompatActivity() {
         Log.d("TODO", "Update: $list")
         exchange_rates_list.visibility = View.VISIBLE
         exchangeRateListAdapter.updateItems(list)
-
     }
 
     private fun showLoading() {
