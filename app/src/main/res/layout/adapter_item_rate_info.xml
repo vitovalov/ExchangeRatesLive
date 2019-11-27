@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="@dimen/currency_item_row_padding">
+
+    <ImageView
+        android:id="@+id/currency_flag"
+        tools:background="#ccc"
+        android:layout_width="@dimen/currency_flag_image_size"
+        android:layout_height="@dimen/currency_flag_image_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        android:contentDescription="@string/accessibility_currency_flag_image" />
+
+    <TextView
+        android:id="@+id/currency_code_tv"
+        tools:text="EUR"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/currency_code_text_size"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/currency_flag"
+        android:layout_marginStart="@dimen/currency_info_margin_left" />
+
+    <TextView
+        android:id="@+id/currency_fullname_tv"
+        tools:text="British Pound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/currency_name_margin_top"
+        android:textSize="@dimen/currency_name_text_size"
+        app:layout_constraintTop_toBottomOf="@+id/currency_code_tv"
+        app:layout_constraintStart_toEndOf="@+id/currency_flag"
+        android:layout_marginStart="@dimen/currency_info_margin_left" />
+
+    <EditText
+        android:id="@+id/amount_tv"
+        tools:text="22.12345678"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/amount_text_size"
+        android:hint="@string/placeholder_amount_tv"
+        android:inputType="numberDecimal"
+        android:paddingBottom="@dimen/amount_tv_padding_bottom"
+        android:maxLength="7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
