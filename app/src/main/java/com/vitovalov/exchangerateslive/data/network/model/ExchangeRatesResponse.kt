@@ -1,4 +1,4 @@
-package com.vitovalov.exchangerateslive.data.datasource.network.model
+package com.vitovalov.exchangerateslive.data.network.model
 
 import com.google.gson.annotations.SerializedName
 

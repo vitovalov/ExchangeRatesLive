@@ -1,4 +1,4 @@
-package com.vitovalov.exchangerateslive.data.datasource.local.model
+package com.vitovalov.exchangerateslive.data.local.model
 
 import java.math.BigDecimal
 import java.util.*

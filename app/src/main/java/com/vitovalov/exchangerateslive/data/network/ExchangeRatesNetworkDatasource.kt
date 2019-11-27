@@ -1,4 +1,4 @@
-package com.vitovalov.exchangerateslive.data.datasource.network
+package com.vitovalov.exchangerateslive.data.network
 
 import com.vitovalov.exchangerateslive.domain.model.ExchangeRatesModel
 import io.reactivex.Single

@@ -1,4 +1,4 @@
-package com.vitovalov.exchangerateslive.data.datasource.local.model
+package com.vitovalov.exchangerateslive.data.local.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

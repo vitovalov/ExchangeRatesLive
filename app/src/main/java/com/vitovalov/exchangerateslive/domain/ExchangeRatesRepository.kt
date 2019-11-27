@@ -1,6 +1,6 @@
 package com.vitovalov.exchangerateslive.domain
 
-import com.vitovalov.exchangerateslive.data.datasource.local.model.UserChangesModel
+import com.vitovalov.exchangerateslive.data.local.model.UserChangesModel
 import com.vitovalov.exchangerateslive.domain.model.ExchangeRatesModel
 import io.reactivex.Completable
 import io.reactivex.Flowable

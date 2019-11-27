@@ -1,8 +1,8 @@
-package com.vitovalov.exchangerateslive.data.datasource
+package com.vitovalov.exchangerateslive.data
 
-import com.vitovalov.exchangerateslive.data.datasource.local.UserChangesLocalDatasource
-import com.vitovalov.exchangerateslive.data.datasource.local.model.UserChangesModel
-import com.vitovalov.exchangerateslive.data.datasource.network.ExchangeRatesNetworkDatasource
+import com.vitovalov.exchangerateslive.data.local.UserChangesLocalDatasource
+import com.vitovalov.exchangerateslive.data.local.model.UserChangesModel
+import com.vitovalov.exchangerateslive.data.network.ExchangeRatesNetworkDatasource
 import com.vitovalov.exchangerateslive.domain.ExchangeRatesRepository
 import com.vitovalov.exchangerateslive.domain.model.ExchangeRatesModel
 import com.vitovalov.exchangerateslive.internal.Config

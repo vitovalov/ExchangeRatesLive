@@ -1,9 +1,9 @@
 package com.vitovalov.exchangerateslive.internal.di
 
 import android.app.Application
-import com.vitovalov.exchangerateslive.data.datasource.local.RoomUserChangesDb
-import com.vitovalov.exchangerateslive.data.datasource.local.UserChangesLocalDatasource
-import com.vitovalov.exchangerateslive.data.datasource.local.UserChangesRoomDatasource
+import com.vitovalov.exchangerateslive.data.local.RoomUserChangesDb
+import com.vitovalov.exchangerateslive.data.local.UserChangesLocalDatasource
+import com.vitovalov.exchangerateslive.data.local.UserChangesRoomDatasource
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

@@ -1,8 +1,8 @@
 package com.vitovalov.exchangerateslive.internal.di
 
-import com.vitovalov.exchangerateslive.data.datasource.ExchangeRatesDatasource
-import com.vitovalov.exchangerateslive.data.datasource.local.UserChangesLocalDatasource
-import com.vitovalov.exchangerateslive.data.datasource.network.ExchangeRatesNetworkDatasource
+import com.vitovalov.exchangerateslive.data.ExchangeRatesDatasource
+import com.vitovalov.exchangerateslive.data.local.UserChangesLocalDatasource
+import com.vitovalov.exchangerateslive.data.network.ExchangeRatesNetworkDatasource
 import com.vitovalov.exchangerateslive.domain.ExchangeRatesRepository
 import dagger.Module
 import dagger.Provides
@@ -17,5 +17,8 @@ class RepositoryModule {
         remoteDatasource: ExchangeRatesNetworkDatasource,
         localDatasource: UserChangesLocalDatasource
     ): ExchangeRatesRepository =
-        ExchangeRatesDatasource(remoteDatasource, localDatasource)
+        ExchangeRatesDatasource(
+            remoteDatasource,
+            localDatasource
+        )
 }

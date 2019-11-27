@@ -1,6 +1,6 @@
-package com.vitovalov.exchangerateslive.data.datasource.network
+package com.vitovalov.exchangerateslive.data.network
 
-import com.vitovalov.exchangerateslive.data.datasource.network.model.ExchangeRatesResponse
+import com.vitovalov.exchangerateslive.data.network.model.ExchangeRatesResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

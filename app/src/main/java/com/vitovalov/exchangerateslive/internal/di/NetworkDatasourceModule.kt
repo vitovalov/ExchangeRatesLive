@@ -3,9 +3,9 @@ package com.vitovalov.exchangerateslive.internal.di
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.vitovalov.exchangerateslive.BuildConfig
 import com.vitovalov.exchangerateslive.internal.Config
-import com.vitovalov.exchangerateslive.data.datasource.network.ExchangeRatesNetworkDatasource
-import com.vitovalov.exchangerateslive.data.datasource.network.ExchangeRatesApiService
-import com.vitovalov.exchangerateslive.data.datasource.network.ExchangeRatesRevolutNetworkDatasource
+import com.vitovalov.exchangerateslive.data.network.ExchangeRatesNetworkDatasource
+import com.vitovalov.exchangerateslive.data.network.ExchangeRatesApiService
+import com.vitovalov.exchangerateslive.data.network.ExchangeRatesRevolutNetworkDatasource
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

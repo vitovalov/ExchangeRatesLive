@@ -1,6 +1,6 @@
-package com.vitovalov.exchangerateslive.data.datasource.local
+package com.vitovalov.exchangerateslive.data.local
 
-import com.vitovalov.exchangerateslive.data.datasource.local.model.UserChangesModel
+import com.vitovalov.exchangerateslive.data.local.model.UserChangesModel
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import java.math.BigDecimal

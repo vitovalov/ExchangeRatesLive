@@ -1,10 +1,10 @@
-package com.vitovalov.exchangerateslive.data.datasource.local
+package com.vitovalov.exchangerateslive.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.vitovalov.exchangerateslive.data.datasource.local.model.UserChangesEntity
+import com.vitovalov.exchangerateslive.data.local.model.UserChangesEntity
 import io.reactivex.Completable
 import io.reactivex.Flowable
 

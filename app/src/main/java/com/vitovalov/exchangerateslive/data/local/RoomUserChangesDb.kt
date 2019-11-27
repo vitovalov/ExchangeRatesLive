@@ -1,4 +1,4 @@
-package com.vitovalov.exchangerateslive.data.datasource.local
+package com.vitovalov.exchangerateslive.data.local
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,7 +6,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.vitovalov.exchangerateslive.data.datasource.local.model.UserChangesEntity
+import com.vitovalov.exchangerateslive.data.local.model.UserChangesEntity
 import io.reactivex.schedulers.Schedulers
 
 @Database(
