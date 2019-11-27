@@ -4,7 +4,7 @@ import java.math.RoundingMode
 import java.util.*
 
 object Config {
-    const val API_BASE_URL = "***REMOVED***"
+    const val API_BASE_URL = "aHR0cHM6Ly9yZXZvbHV0LmR1Y2tkbnMub3JnLwo="
     const val TIME_INTERVAL_BETWEEN_NETWORK_REFRESHES: Long = 1
     const val MATH_PRECISION: Int = 6
     val START_BASE_CURRENCY: Currency = Currency.getInstance("EUR")
