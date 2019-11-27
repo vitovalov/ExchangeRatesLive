@@ -1,9 +1,12 @@
 package com.vitovalov.exchangerateslive.presentation.view
 
+import android.app.Application
+import android.content.Context
 import android.widget.ImageView
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.DiffUtil
 import com.squareup.picasso.Picasso
+import com.vitovalov.exchangerateslive.ExchangeRatesLiveApp
 import com.vitovalov.exchangerateslive.R
 import com.vitovalov.exchangerateslive.domain.ObserveExchangeRatesUseCase
 import com.vitovalov.exchangerateslive.domain.UpdateBaseCurrencyUseCase
@@ -23,6 +26,7 @@ import java.util.*
 import javax.inject.Inject
 
 class ExchangeRatesListViewModel @Inject constructor(
+    private val appContext: Application,
     private val observeExchangeRatesUseCase: ObserveExchangeRatesUseCase,
     private val updateUserAmountUseCase: UpdateUserAmountUseCase,
     private val updateBaseCurrencyUseCase: UpdateBaseCurrencyUseCase
@@ -34,7 +38,7 @@ class ExchangeRatesListViewModel @Inject constructor(
     private var userBaseChangedDisposable: Disposable? = null
 
     fun observeExchangeListState(flowableSubscriber: DisposableSubscriber<ExchangeListUiState>) {
-        flowableSubscriber.onNext(ExchangeListUiState.Loading("Loading..."))
+        flowableSubscriber.onNext(ExchangeListUiState.Loading(appContext.getString(R.string.generic_loading)))
         exchangeRatesDisposable?.dispose()
         observeExchangeRatesUseCase.execute()
             .map { ExchangeListUiState.Update(it) }

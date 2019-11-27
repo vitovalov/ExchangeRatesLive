@@ -4,4 +4,5 @@
     <string name="accessibility_currency_flag_image">Currency Flag Image</string>
     <string name="placeholder_amount_tv">0</string>
     <string name="title_tv">Rates</string>
+    <string name="generic_loading">Loading...</string>
 </resources>
