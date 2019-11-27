@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.vitovalov.exchangerateslive.R
-import com.vitovalov.exchangerateslive.presentation.model.ExchangeRateUiModel
+import com.vitovalov.exchangerateslive.presentation.model.ExchangeRatesUiModel
 import com.vitovalov.exchangerateslive.presentation.view.uiutils.AmountInputTextWatcher
 import com.vitovalov.exchangerateslive.presentation.view.uiutils.CurrencyAmountDifference
 import io.reactivex.Single
@@ -19,11 +19,11 @@ import kotlinx.android.synthetic.main.adapter_item_rate_info.view.*
 import java.math.BigDecimal
 
 class ExchangeRatesListAdapter(
-    private val onCurrencySelected: (ExchangeRateUiModel) -> Unit,
+    private val onCurrencySelected: (ExchangeRatesUiModel) -> Unit,
     onAmountChanged: (BigDecimal) -> Unit,
-    private val onCalculateDiffList: (List<ExchangeRateUiModel>, List<ExchangeRateUiModel>) -> Single<DiffUtil.DiffResult>,
-    private val loadImage: (ImageView, ExchangeRateUiModel) -> Unit,
-    private val itemList: MutableList<ExchangeRateUiModel>
+    private val onCalculateDiffList: (List<ExchangeRatesUiModel>, List<ExchangeRatesUiModel>) -> Single<DiffUtil.DiffResult>,
+    private val loadImage: (ImageView, ExchangeRatesUiModel) -> Unit,
+    private val itemList: MutableList<ExchangeRatesUiModel>
 ) : RecyclerView.Adapter<ExchangeRatesListAdapter.RateInfoViewHolder>() {
 
     private val amountInputTextWatcher = AmountInputTextWatcher(onAmountChanged)
@@ -89,7 +89,7 @@ class ExchangeRatesListAdapter(
         }
     }
 
-    fun updateItems(newList: List<ExchangeRateUiModel>) {
+    fun updateItems(newList: List<ExchangeRatesUiModel>) {
         listsDiffDisposable?.dispose()
         onCalculateDiffList(itemList, newList)
             .observeOn(AndroidSchedulers.mainThread())

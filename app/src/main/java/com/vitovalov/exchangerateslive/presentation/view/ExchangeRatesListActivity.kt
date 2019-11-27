@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vitovalov.exchangerateslive.R
 import com.vitovalov.exchangerateslive.presentation.model.ExchangeListUiState
-import com.vitovalov.exchangerateslive.presentation.model.ExchangeRateUiModel
+import com.vitovalov.exchangerateslive.presentation.model.ExchangeRatesUiModel
 import dagger.android.AndroidInjection
 import io.reactivex.subscribers.DisposableSubscriber
 import kotlinx.android.synthetic.main.activity_exchange_rates_list.*
@@ -66,7 +66,7 @@ class ExchangeRatesListActivity : AppCompatActivity() {
         )
     }
 
-    private fun updateItems(list: List<ExchangeRateUiModel>) {
+    private fun updateItems(list: List<ExchangeRatesUiModel>) {
         exchange_rates_list.visibility = View.VISIBLE
         exchangeRateListAdapter.updateItems(list)
 

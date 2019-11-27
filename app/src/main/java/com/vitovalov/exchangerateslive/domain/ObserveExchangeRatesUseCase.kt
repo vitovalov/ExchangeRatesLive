@@ -3,7 +3,7 @@ package com.vitovalov.exchangerateslive.domain
 import com.vitovalov.exchangerateslive.data.local.model.UserChangesModel
 import com.vitovalov.exchangerateslive.domain.model.ExchangeRatesModel
 import com.vitovalov.exchangerateslive.internal.Config
-import com.vitovalov.exchangerateslive.presentation.model.ExchangeRateUiModel
+import com.vitovalov.exchangerateslive.presentation.model.ExchangeRatesUiModel
 import io.reactivex.Flowable
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
@@ -15,12 +15,12 @@ class ObserveExchangeRatesUseCase(
     private val mathContext: MathContext
 ) {
 
-    fun execute(): Flowable<List<ExchangeRateUiModel>> =
+    fun execute(): Flowable<List<ExchangeRatesUiModel>> =
         Flowable.combineLatest(
             repository.observeExchangeRates(Config.START_BASE_CURRENCY),
             repository.observeUserCurrencySelection(),
             BiFunction<ExchangeRatesModel, UserChangesModel,
-                    List<ExchangeRateUiModel>> { currencyExchangeRatesModel, userCurrencySelectionModel ->
+                    List<ExchangeRatesUiModel>> { currencyExchangeRatesModel, userCurrencySelectionModel ->
                 currencyExchangeRatesModel.mapToUiModel(
                     userCurrencySelectionModel
                 ).andPlaceBaseCurrencyAtTheTop(userCurrencySelectionModel)
@@ -28,21 +28,21 @@ class ObserveExchangeRatesUseCase(
 
     private fun ExchangeRatesModel.mapToUiModel(
         userCurrencySelectionModel: UserChangesModel
-    ): List<ExchangeRateUiModel> = ratesMap.asSequence().map {
-        ExchangeRateUiModel(
+    ): List<ExchangeRatesUiModel> = ratesMap.asSequence().map {
+        ExchangeRatesUiModel(
             it.key, calculateAmount(this, userCurrencySelectionModel, it.value)
         )
     }.plus(
-        ExchangeRateUiModel(
+        ExchangeRatesUiModel(
             Config.START_BASE_CURRENCY, calculateAmount(
                 this, userCurrencySelectionModel, BigDecimal("1.0")
             )
         )
     ).sortedBy { it.currency.currencyCode }.toList()
 
-    private fun List<ExchangeRateUiModel>.andPlaceBaseCurrencyAtTheTop(
+    private fun List<ExchangeRatesUiModel>.andPlaceBaseCurrencyAtTheTop(
         userCurrencySelectionModel: UserChangesModel
-    ): List<ExchangeRateUiModel> =
+    ): List<ExchangeRatesUiModel> =
         sortedByDescending { it.currency == userCurrencySelectionModel.baseCurrency }
 
     private fun calculateAmount(

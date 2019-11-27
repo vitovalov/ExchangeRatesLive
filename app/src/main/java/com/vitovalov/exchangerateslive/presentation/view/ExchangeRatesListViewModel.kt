@@ -1,18 +1,16 @@
 package com.vitovalov.exchangerateslive.presentation.view
 
 import android.app.Application
-import android.content.Context
 import android.widget.ImageView
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.DiffUtil
 import com.squareup.picasso.Picasso
-import com.vitovalov.exchangerateslive.ExchangeRatesLiveApp
 import com.vitovalov.exchangerateslive.R
 import com.vitovalov.exchangerateslive.domain.ObserveExchangeRatesUseCase
 import com.vitovalov.exchangerateslive.domain.UpdateBaseCurrencyUseCase
 import com.vitovalov.exchangerateslive.domain.UpdateUserAmountUseCase
 import com.vitovalov.exchangerateslive.presentation.model.ExchangeListUiState
-import com.vitovalov.exchangerateslive.presentation.model.ExchangeRateUiModel
+import com.vitovalov.exchangerateslive.presentation.model.ExchangeRatesUiModel
 import com.vitovalov.exchangerateslive.presentation.view.uiutils.ExchangeRateItemDiffList
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -48,7 +46,7 @@ class ExchangeRatesListViewModel @Inject constructor(
             .let { exchangeRatesDisposable = it }
     }
 
-    fun onCurrencySelected(uiModel: ExchangeRateUiModel) {
+    fun onCurrencySelected(uiModel: ExchangeRatesUiModel) {
         userBaseChangedDisposable?.dispose()
         updateBaseCurrencyUseCase.execute(uiModel.currency)
             .andThen(updateUserAmountUseCase.execute(uiModel.amount))
@@ -64,8 +62,8 @@ class ExchangeRatesListViewModel @Inject constructor(
     }
 
     fun calculateListsDifferences(
-        oldList: List<ExchangeRateUiModel>,
-        newList: List<ExchangeRateUiModel>
+        oldList: List<ExchangeRatesUiModel>,
+        newList: List<ExchangeRatesUiModel>
     ): Single<DiffUtil.DiffResult> {
         return Single.just(
             DiffUtil.calculateDiff(
@@ -78,7 +76,7 @@ class ExchangeRatesListViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
     }
 
-    fun loadItemImage(imageView: ImageView, item: ExchangeRateUiModel) {
+    fun loadItemImage(imageView: ImageView, item: ExchangeRatesUiModel) {
         Picasso.get()
             .load("https://www.countryflags.io/${getCountryCode(item.currency)}/shiny/64.png")
             .placeholder(R.drawable.image_placeholder)
