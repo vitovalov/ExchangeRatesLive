@@ -5,7 +5,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.vitovalov.exchangerateslive.BuildConfig
 import com.vitovalov.exchangerateslive.data.network.ExchangeRatesApiService
 import com.vitovalov.exchangerateslive.data.network.ExchangeRatesNetworkDatasource
-import com.vitovalov.exchangerateslive.data.network.ExchangeRatesRevolutNetworkDatasource
+import com.vitovalov.exchangerateslive.data.network.ExchangeRatesRevoNetworkDatasource
 import com.vitovalov.exchangerateslive.internal.Config
 import dagger.Module
 import dagger.Provides
@@ -23,11 +23,11 @@ class NetworkDatasourceModule {
     @Singleton
     @Provides
     fun providesExchangeRatesNetworkService(service: ExchangeRatesApiService): ExchangeRatesNetworkDatasource =
-        ExchangeRatesRevolutNetworkDatasource(service)
+        ExchangeRatesRevoNetworkDatasource(service)
 
     @Singleton
     @Provides
-    fun providesRevolutExchangeRatesApiService(retrofit: Retrofit): ExchangeRatesApiService =
+    fun providesRevoExchangeRatesApiService(retrofit: Retrofit): ExchangeRatesApiService =
         retrofit.create(ExchangeRatesApiService::class.java)
 
 

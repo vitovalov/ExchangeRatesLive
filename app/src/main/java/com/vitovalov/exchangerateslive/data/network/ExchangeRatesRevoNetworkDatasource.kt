@@ -6,7 +6,7 @@ import io.reactivex.schedulers.Schedulers
 import java.math.BigDecimal
 import java.util.*
 
-class ExchangeRatesRevolutNetworkDatasource(private val apiService: ExchangeRatesApiService) :
+class ExchangeRatesRevoNetworkDatasource(private val apiService: ExchangeRatesApiService) :
     ExchangeRatesNetworkDatasource {
 
     override fun getExchangeRatesForBase(baseCurrency: Currency): Single<ExchangeRatesModel> =

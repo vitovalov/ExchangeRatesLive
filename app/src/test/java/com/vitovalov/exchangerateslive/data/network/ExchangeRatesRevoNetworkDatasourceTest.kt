@@ -10,11 +10,11 @@ import org.junit.Test
 import java.io.IOException
 import java.util.*
 
-class ExchangeRatesRevolutNetworkDatasourceTest {
+class ExchangeRatesRevoNetworkDatasourceTest {
 
     private val apiService = mockk<ExchangeRatesApiService>()
     private val networkDatasource =
-        ExchangeRatesRevolutNetworkDatasource(apiService)
+        ExchangeRatesRevoNetworkDatasource(apiService)
 
     @Test
     fun `given base currency and correct API answer returns exchange rates model`() {
