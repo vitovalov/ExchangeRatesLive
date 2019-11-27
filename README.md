@@ -22,7 +22,15 @@ Demonstrates the best use of Android frameworks to create maintainable, scalable
 - `minSdkVersion 24` is chosen to favor fast compile times during the
   development
 
-### ----------------------------------------------------------------------------------------------
+## Android Clean Layered Architecture
+![clean](https://github.com/android10/Sample-Data/blob/master/Android-CleanArchitecture-Kotlin/architecture/clean_architecture_reloaded_layers.png)
+
+## Presentation Layer: MVVM 
+![https://fernandocejas.com/2018/05/07/architecting-android-reloaded/](https://github.com/android10/Sample-Data/blob/master/Android-CleanArchitecture-Kotlin/architecture/clean_architecture_reloaded_mvvm_app.png)
+*Note: instead of LiveData, this projects uses RxJava
+
+## Data Layer: Repository 
+![https://fernandocejas.com/2018/05/07/architecting-android-reloaded/](https://github.com/android10/Sample-Data/blob/master/Android-CleanArchitecture-Kotlin/architecture/clean_archictecture_reloaded_repository.png)
  
 ## Code style
 Official Android Studio default built-in codeStyle has been used for this project.
