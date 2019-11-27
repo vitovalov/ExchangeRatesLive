@@ -3,37 +3,37 @@ package com.vitovalov.exchangerateslive.presentation.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.vitovalov.exchangerateslive.R
+import com.vitovalov.exchangerateslive.presentation.model.ExchangeRateUiModel
 import com.vitovalov.exchangerateslive.presentation.view.uiutils.AmountInputTextWatcher
 import com.vitovalov.exchangerateslive.presentation.view.uiutils.CurrencyAmountDifference
-import com.vitovalov.exchangerateslive.presentation.model.ExchangeRateUiModel
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.item_rate_info.view.*
+import kotlinx.android.synthetic.main.adapter_item_rate_info.view.*
 import java.math.BigDecimal
 
 class ExchangeRatesListAdapter(
     private val onCurrencySelected: (ExchangeRateUiModel) -> Unit,
     onAmountChanged: (BigDecimal) -> Unit,
     private val onCalculateDiffList: (List<ExchangeRateUiModel>, List<ExchangeRateUiModel>) -> Single<DiffUtil.DiffResult>,
+    private val loadImage: (ImageView, ExchangeRateUiModel) -> Unit,
     private val itemList: MutableList<ExchangeRateUiModel>
-) :
-    RecyclerView.Adapter<ExchangeRatesListAdapter.RateInfoViewHolder>() {
+) : RecyclerView.Adapter<ExchangeRatesListAdapter.RateInfoViewHolder>() {
 
-    private val amountInputTextWatcher =
-        AmountInputTextWatcher(
-            onAmountChanged
-        )
+    private val amountInputTextWatcher = AmountInputTextWatcher(onAmountChanged)
     private var listsDiffDisposable: Disposable? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RateInfoViewHolder {
         val viewHolder =
             RateInfoViewHolder(
                 LayoutInflater.from(parent.context).inflate(
-                    R.layout.item_rate_info, parent, false
+                    R.layout.adapter_item_rate_info, parent, false
                 )
             )
         viewHolder.itemView.setOnClickListener {
@@ -65,8 +65,9 @@ class ExchangeRatesListAdapter(
 
     override fun onBindViewHolder(holder: RateInfoViewHolder, position: Int) {
         val currencyItem = itemList[position]
-        holder.currencyCodeText?.text = currencyItem.currency.currencyCode
-        holder.currencyNameText?.text = currencyItem.currency.displayName
+        holder.currencyCodeText.text = currencyItem.currency.currencyCode
+        holder.currencyNameText.text = currencyItem.currency.displayName
+        loadImage(holder.currencyFlagImage, currencyItem)
         with(holder.currencyAmountEditText) {
             if (!isFocused) setText(currencyItem.amount.toPlainString())
         }
@@ -101,8 +102,9 @@ class ExchangeRatesListAdapter(
     }
 
     class RateInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val currencyCodeText = itemView.currency_tv
-        val currencyNameText = itemView.currency_name_tv
-        val currencyAmountEditText = itemView.amount_et
+        val currencyCodeText: TextView = itemView.currency_code_tv
+        val currencyNameText: TextView = itemView.currency_fullname_tv
+        val currencyAmountEditText: EditText = itemView.amount_tv
+        val currencyFlagImage: ImageView = itemView.currency_flag
     }
 }

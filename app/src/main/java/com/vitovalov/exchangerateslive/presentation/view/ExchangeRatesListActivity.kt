@@ -1,7 +1,6 @@
 package com.vitovalov.exchangerateslive.presentation.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -12,7 +11,7 @@ import com.vitovalov.exchangerateslive.presentation.model.ExchangeListUiState
 import com.vitovalov.exchangerateslive.presentation.model.ExchangeRateUiModel
 import dagger.android.AndroidInjection
 import io.reactivex.subscribers.DisposableSubscriber
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_exchange_rates_list.*
 import javax.inject.Inject
 
 class ExchangeRatesListActivity : AppCompatActivity() {
@@ -25,7 +24,7 @@ class ExchangeRatesListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_exchange_rates_list)
 
         viewModel =
             ViewModelProviders.of(this, viewModelFactory)[ExchangeRatesListViewModel::class.java]
@@ -34,7 +33,8 @@ class ExchangeRatesListActivity : AppCompatActivity() {
             ExchangeRatesListAdapter(
                 viewModel::onCurrencySelected,
                 viewModel::onAmountChanged,
-                viewModel::onCalculateListsDifferences,
+                viewModel::calculateListsDifferences,
+                viewModel::loadItemImage,
                 mutableListOf()
             ).apply { setHasStableIds(true) }
 
@@ -60,23 +60,39 @@ class ExchangeRatesListActivity : AppCompatActivity() {
                 }
 
                 override fun onError(t: Throwable) {
-                    Log.e("TODO", "Error: ${t.message}")
+                    showError(getString(R.string.generic_error))
                 }
             }
         )
     }
 
     private fun updateItems(list: List<ExchangeRateUiModel>) {
-        Log.d("TODO", "Update: $list")
         exchange_rates_list.visibility = View.VISIBLE
         exchangeRateListAdapter.updateItems(list)
+
+        error_image.visibility = View.GONE
+        error_text.visibility = View.GONE
+        progress_bar.visibility = View.GONE
+        progress_text.visibility = View.GONE
     }
 
     private fun showLoading() {
-        Log.d("TODO", "Loading")
+        progress_bar.visibility = View.VISIBLE
+
+        progress_text.visibility = View.GONE
+        error_image.visibility = View.GONE
+        error_text.visibility = View.GONE
+        exchange_rates_list.visibility = View.GONE
     }
 
-    private fun showError(msg: String) {
-        Log.e("TODO", "Error $msg")
+    private fun showError(message: String) {
+        error_text.text = message
+
+        error_image.visibility = View.VISIBLE
+        error_text.visibility = View.VISIBLE
+
+        progress_bar.visibility = View.GONE
+        progress_text.visibility = View.GONE
+        exchange_rates_list.visibility = View.GONE
     }
 }
