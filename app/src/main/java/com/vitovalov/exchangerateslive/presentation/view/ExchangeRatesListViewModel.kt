@@ -28,8 +28,7 @@ class ExchangeRatesListViewModel @Inject constructor(
     private val observeExchangeRatesUseCase: ObserveExchangeRatesUseCase,
     private val updateUserAmountUseCase: UpdateUserAmountUseCase,
     private val updateBaseCurrencyUseCase: UpdateBaseCurrencyUseCase
-) :
-    ViewModel() {
+) : ViewModel() {
 
     private var exchangeRatesDisposable: Disposable? = null
     private var userAmountDisposable: Disposable? = null
