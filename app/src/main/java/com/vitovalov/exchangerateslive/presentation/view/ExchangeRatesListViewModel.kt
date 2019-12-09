@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.DiffUtil
 import com.squareup.picasso.Picasso
 import com.vitovalov.exchangerateslive.R
+import com.vitovalov.exchangerateslive.domain.ObserveAndCalculateExchangeRatesUseCase
 import com.vitovalov.exchangerateslive.domain.ObserveExchangeRatesUseCase
 import com.vitovalov.exchangerateslive.domain.UpdateBaseCurrencyUseCase
 import com.vitovalov.exchangerateslive.domain.UpdateUserAmountUseCase

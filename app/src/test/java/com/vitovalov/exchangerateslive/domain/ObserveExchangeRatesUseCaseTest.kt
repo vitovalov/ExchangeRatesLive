@@ -17,7 +17,7 @@ class ObserveExchangeRatesUseCaseTest {
 
     private val repository = mockk<ExchangeRatesRepository>()
     private val mathContext = MathContext(Config.MATH_PRECISION, Config.MATH_ROUNDING_MODE)
-    private val useCase = ObserveExchangeRatesUseCase(repository, mathContext)
+    private val useCase = ObserveAndCalculateExchangeRatesUseCase(repository, mathContext)
 
     @Test
     fun `when repository answers OK should return correct exchange rates`() {

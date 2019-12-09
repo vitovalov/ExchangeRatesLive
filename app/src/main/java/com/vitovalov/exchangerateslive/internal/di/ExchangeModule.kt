@@ -1,9 +1,6 @@
 package com.vitovalov.exchangerateslive.internal.di
 
-import com.vitovalov.exchangerateslive.domain.UpdateBaseCurrencyUseCase
-import com.vitovalov.exchangerateslive.domain.ExchangeRatesRepository
-import com.vitovalov.exchangerateslive.domain.ObserveExchangeRatesUseCase
-import com.vitovalov.exchangerateslive.domain.UpdateUserAmountUseCase
+import com.vitovalov.exchangerateslive.domain.*
 import com.vitovalov.exchangerateslive.internal.Config
 import dagger.Module
 import dagger.Provides
