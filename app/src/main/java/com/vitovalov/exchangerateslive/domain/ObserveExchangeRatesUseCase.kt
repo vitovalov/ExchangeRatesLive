@@ -13,11 +13,15 @@ class ObserveExchangeRatesUseCase(
     private val mathContext: MathContext
 ) {
     fun execute(): Flowable<List<ExchangeRatesUiModel>> =
-        repository.observeUserCurrencySelection().switchMap { userChanges ->
+        repository.observeUserCurrencySelection().doOnNext {
+            println("inside useCase doOnNext")
+
+        }.switchMap {
+                userChanges ->
             repository.observeExchangeRates(userChanges.baseCurrency).map { newRates ->
                 newRates.mapToUiModel(userChanges).andPlaceBaseCurrencyAtTheTop(userChanges)
             }
-        }.subscribeOn(Schedulers.computation())
+        }.subscribeOn(Schedulers.io())
 
 
     private fun ExchangeRatesModel.mapToUiModel(

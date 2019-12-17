@@ -13,6 +13,7 @@ class UserChangesRoomDatasource(private val roomDb: RoomUserChangesDb) : UserCha
                     .userChangesDao()
                     .observeUserAmountChanges()
                     .map {
+                        println("inside map of roomDB")
                         UserChangesModel(
                                 Currency.getInstance(it.selectedCurrencyCode),
                                 BigDecimal(it.selectedCurrencyAmount)

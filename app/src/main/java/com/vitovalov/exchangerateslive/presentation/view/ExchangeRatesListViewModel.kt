@@ -1,18 +1,20 @@
 package com.vitovalov.exchangerateslive.presentation.view
 
-import android.app.Application
+import android.content.Context
 import android.widget.ImageView
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.DiffUtil
+import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
 import com.squareup.picasso.Picasso
 import com.vitovalov.exchangerateslive.R
-import com.vitovalov.exchangerateslive.domain.ObserveAndCalculateExchangeRatesUseCase
 import com.vitovalov.exchangerateslive.domain.ObserveExchangeRatesUseCase
 import com.vitovalov.exchangerateslive.domain.UpdateBaseCurrencyUseCase
 import com.vitovalov.exchangerateslive.domain.UpdateUserAmountUseCase
 import com.vitovalov.exchangerateslive.presentation.model.ExchangeListUiState
 import com.vitovalov.exchangerateslive.presentation.model.ExchangeRatesUiModel
 import com.vitovalov.exchangerateslive.presentation.view.uiutils.ExchangeRateItemDiffList
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable.empty
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -22,28 +24,41 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import jp.wasabeef.picasso.transformations.CropTransformation
 import java.math.BigDecimal
 import java.util.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class ExchangeRatesListViewModel @Inject constructor(
-    private val appContext: Application,
+    private val appContext: Context,
     private val observeExchangeRatesUseCase: ObserveExchangeRatesUseCase,
     private val updateUserAmountUseCase: UpdateUserAmountUseCase,
     private val updateBaseCurrencyUseCase: UpdateBaseCurrencyUseCase
 ) : ViewModel() {
 
+    private var networkStatusDisposable: Disposable? = null
     private var exchangeRatesDisposable: Disposable? = null
     private var userAmountDisposable: Disposable? = null
     private var userBaseChangedDisposable: Disposable? = null
 
     fun observeExchangeListState(flowableSubscriber: DisposableSubscriber<ExchangeListUiState>) {
-        flowableSubscriber.onNext(ExchangeListUiState.Loading(appContext.getString(R.string.generic_loading)))
-        exchangeRatesDisposable?.dispose()
-        observeExchangeRatesUseCase.execute()
-            .map { ExchangeListUiState.Update(it) }
+//        flowableSubscriber.onNext(ExchangeListUiState.Loading(appContext.getString(R.string.generic_loading)))
+//        networkStatusDisposable?.dispose()
+        ReactiveNetwork.observeInternetConnectivity()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(flowableSubscriber)
+            .doOnNext { println("connected: $it") }
+            .filter { it } // it == true, filter only connected
+            .toFlowable(BackpressureStrategy.DROP)
+            .delay(5, TimeUnit.SECONDS)
+            .flatMap {
+                observeExchangeRatesUseCase.execute()
+                    .map { uiModel -> ExchangeListUiState.Update(uiModel) }
+                    .doOnError { println("error $it") }
+                    .onErrorResumeNext(empty())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+            }.subscribeWith(flowableSubscriber)
             .let { exchangeRatesDisposable = it }
+
     }
 
     fun onCurrencySelected(uiModel: ExchangeRatesUiModel) {
@@ -72,8 +87,7 @@ class ExchangeRatesListViewModel @Inject constructor(
                     newList
                 )
             )
-        )
-            .subscribeOn(Schedulers.io())
+        ).subscribeOn(Schedulers.io())
     }
 
     fun loadItemImage(imageView: ImageView, item: ExchangeRatesUiModel) {
@@ -109,5 +123,6 @@ class ExchangeRatesListViewModel @Inject constructor(
         exchangeRatesDisposable?.dispose()
         userAmountDisposable?.dispose()
         userBaseChangedDisposable?.dispose()
+        networkStatusDisposable?.dispose()
     }
 }

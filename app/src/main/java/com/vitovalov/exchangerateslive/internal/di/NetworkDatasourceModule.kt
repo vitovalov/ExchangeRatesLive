@@ -1,5 +1,6 @@
 package com.vitovalov.exchangerateslive.internal.di
 
+import android.content.Context
 import android.util.Base64
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.vitovalov.exchangerateslive.BuildConfig
@@ -22,14 +23,16 @@ class NetworkDatasourceModule {
 
     @Singleton
     @Provides
-    fun providesExchangeRatesNetworkService(service: ExchangeRatesApiService): ExchangeRatesNetworkDatasource =
-        ExchangeRatesRevoNetworkDatasource(service)
+    fun providesExchangeRatesNetworkService(
+        service: ExchangeRatesApiService,
+        context: Context
+    ): ExchangeRatesNetworkDatasource =
+        ExchangeRatesRevoNetworkDatasource(service, context)
 
     @Singleton
     @Provides
     fun providesRevoExchangeRatesApiService(retrofit: Retrofit): ExchangeRatesApiService =
         retrofit.create(ExchangeRatesApiService::class.java)
-
 
     @Singleton
     @Provides
@@ -55,7 +58,7 @@ class NetworkDatasourceModule {
     @Provides
     fun providesOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
         OkHttpClient.Builder()
-            // .addInterceptor(loggingInterceptor) // uncomment to see request logs
+             .addInterceptor(loggingInterceptor) // uncomment to see request logs
             .build()
 
     @Provides

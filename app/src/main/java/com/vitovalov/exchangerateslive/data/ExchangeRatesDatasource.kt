@@ -22,11 +22,11 @@ class ExchangeRatesDatasource(
             .repeatWhen {
                 it.delay(Config.TIME_INTERVAL_BETWEEN_NETWORK_REFRESHES, TimeUnit.SECONDS)
             }.retry(1)
-            .subscribeOn(Schedulers.computation())
+            .subscribeOn(Schedulers.io())
 
     override fun observeUserCurrencySelection(): Flowable<UserChangesModel> =
         localDatasource.observeUserChanges()
-            .subscribeOn(Schedulers.computation())
+            .subscribeOn(Schedulers.io())
 
 
     override fun updateUserAmount(newAmount: BigDecimal) =

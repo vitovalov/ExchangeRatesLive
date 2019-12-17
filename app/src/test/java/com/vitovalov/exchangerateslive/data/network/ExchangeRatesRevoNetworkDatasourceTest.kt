@@ -14,7 +14,7 @@ class ExchangeRatesRevoNetworkDatasourceTest {
 
     private val apiService = mockk<ExchangeRatesApiService>()
     private val networkDatasource =
-        ExchangeRatesRevoNetworkDatasource(apiService)
+        ExchangeRatesRevoNetworkDatasource(apiService,)
 
     @Test
     fun `given base currency and correct API answer returns exchange rates model`() {

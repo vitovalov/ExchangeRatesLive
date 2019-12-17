@@ -42,14 +42,26 @@ class ExchangeRatesListActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@ExchangeRatesListActivity)
             adapter = exchangeRateListAdapter
         }
+
+        retry_button.setOnClickListener {
+            loadData()
+        }
     }
 
     override fun onResume() {
         super.onResume()
 
+        loadData()
+    }
+
+    private fun loadData() {
+        println("onresume")
+
         viewModel.observeExchangeListState(
             object : DisposableSubscriber<ExchangeListUiState>() {
-                override fun onComplete() {}
+                override fun onComplete() {
+                    println("completetetetet")
+                }
 
                 override fun onNext(state: ExchangeListUiState) {
                     when (state) {
@@ -60,6 +72,7 @@ class ExchangeRatesListActivity : AppCompatActivity() {
                 }
 
                 override fun onError(t: Throwable) {
+                    println("onError!!!  $t")
                     showError(getString(R.string.generic_error))
                 }
             }
@@ -72,6 +85,7 @@ class ExchangeRatesListActivity : AppCompatActivity() {
 
         error_image.visibility = View.GONE
         error_text.visibility = View.GONE
+        retry_button.visibility = View.GONE
         progress_bar.visibility = View.GONE
         progress_text.visibility = View.GONE
     }
@@ -82,7 +96,8 @@ class ExchangeRatesListActivity : AppCompatActivity() {
         progress_text.visibility = View.GONE
         error_image.visibility = View.GONE
         error_text.visibility = View.GONE
-        exchange_rates_list.visibility = View.GONE
+        retry_button.visibility = View.GONE
+//        exchange_rates_list.visibility = View.GONE
     }
 
     private fun showError(message: String) {
@@ -90,9 +105,10 @@ class ExchangeRatesListActivity : AppCompatActivity() {
 
         error_image.visibility = View.VISIBLE
         error_text.visibility = View.VISIBLE
+        retry_button.visibility = View.VISIBLE
 
         progress_bar.visibility = View.GONE
         progress_text.visibility = View.GONE
-        exchange_rates_list.visibility = View.GONE
+//        exchange_rates_list.visibility = View.GONE
     }
 }

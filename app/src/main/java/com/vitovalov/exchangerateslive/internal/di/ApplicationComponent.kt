@@ -1,6 +1,7 @@
 package com.vitovalov.exchangerateslive.internal.di
 
 import android.app.Application
+import android.content.Context
 import com.vitovalov.exchangerateslive.ExchangeRatesLiveApp
 import dagger.BindsInstance
 import dagger.Component
@@ -23,7 +24,7 @@ interface ApplicationComponent {
     interface Builder {
 
         @BindsInstance
-        fun withApplicationContext(application: Application): Builder
+        fun withApplicationContext(context: Context): Builder
 
         fun build(): ApplicationComponent
     }
